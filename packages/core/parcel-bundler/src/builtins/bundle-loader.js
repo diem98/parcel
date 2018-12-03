@@ -52,8 +52,9 @@ function loadBundle(bundle) {
   var type = (bundle.substring(bundle.lastIndexOf('.') + 1, bundle.length) || bundle).toLowerCase();
   var bundleLoader = bundleLoaders[type];
   if (bundleLoader) {
-    return bundles[bundle] = bundleLoader(getBundleURL() + bundle)
+    return bundleLoader(getBundleURL() + bundle)
       .then(function (resolved) {
+        bundles[bundle] = true
         if (resolved) {
           module.bundle.register(id, resolved);
         }
